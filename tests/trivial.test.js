@@ -23,9 +23,9 @@ describe('our testing environment is sane', function(){
     });
 
     // Can I pull in things as expected from node_modules, etc.?
-    it('I can see bbopx from my porch', function(){
-	var bbopx = require('bbopx');
-	assert.typeOf(bbopx, 'object');
+    it('I can see bbop from my porch', function(){
+	var bbop = require('..');
+	assert.typeOf(bbop, 'object');
     });
     
     // Post-run.
