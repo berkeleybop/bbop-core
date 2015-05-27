@@ -956,3 +956,52 @@ describe('fundamental unit tests', function(){
     // // })();
 
 });
+
+describe('attempt at unit tests for logger', function(){
+
+    it('basics', function(){
+
+	var l1 = new bbop.logger();
+	l1.DEBUG = true;
+	function ll1(str){ return l1.kvetch(str); }
+	
+	// Absolute basics.
+	var s1 = ll1('foo');
+	assert.equal('foo', s1, "basic 1");
+	
+	var l2 = new bbop.logger('l2');
+	l2.DEBUG = true;
+	function ll2(str){ return l2.kvetch(str); }
+	
+	var s2 = ll2('foo');
+	assert.equal('l2: foo', s2, "basic 2");
+	
+    });
+
+    it('contexts', function(){
+
+	var l = new bbop.logger('1');
+	l.DEBUG = true;
+	
+	var t1 = l.kvetch('foo');
+	assert.equal('1: foo', t1, "advanced 1");
+	
+	l.push_context('2');
+	l.push_context('3');
+	var t2 = l.kvetch('foo');
+	assert.equal('1:2:3: foo', t2, "advanced 2");
+	
+	l.pop_context();
+	var t3 = l.kvetch('foo');
+	assert.equal('1:2: foo', t3, "advanced 3");
+	
+	l.reset_context();
+	var t4 = l.kvetch('foo');
+	assert.equal('foo', t4, "advanced 4");
+	
+	l.reset_context('a');
+	var t5 = l.kvetch('foo');
+	assert.equal('a: foo', t5, "advanced 5");
+	
+    });
+});
