@@ -3,7 +3,7 @@
 ###
 
 ## Do not make earlier mistakes with documentation.
-doc
+#doc
 !README.org
 
 ## Node modules are handled by "npm install" and out package.json
