@@ -21,10 +21,25 @@ var paths = {
 // Browser runtime environment construction.
 gulp.task('build', ['patch-bump', 'doc']);
 
-gulp.task('patch-bump', function(){
+gulp.task('patch-bump', function(cb){
     gulp.src('./package.json')
 	.pipe(bump({type: 'patch'}))
 	.pipe(gulp.dest('./'));
+    cb(null);
+});
+
+gulp.task('minor-bump', function(cb){
+    gulp.src('./package.json')
+	.pipe(bump({type: 'minor'}))
+	.pipe(gulp.dest('./'));
+    cb(null);
+});
+
+gulp.task('major-bump', function(cb){
+    gulp.src('./package.json')
+	.pipe(bump({type: 'major'}))
+	.pipe(gulp.dest('./'));
+    cb(null);
 });
 
 // Build docs directory with JSDoc.
