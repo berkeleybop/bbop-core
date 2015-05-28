@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
 var git = require('gulp-git');
 var bump = require('gulp-bump');
+var del = require('del');
 
 var paths = {
     readme: ['./README.md'],
@@ -27,24 +28,21 @@ gulp.task('patch-bump', function(){
 });
 
 // Build docs directory with JSDoc.
-gulp.task('doc', function() {
-    gulp.src(paths.docable)
-        .pipe(jsdoc('./doc'));
-});
-
-// Build docs directory with JSDoc.
 //gulp.task('doc', ['md-to-org', 'jsdoc']);
 gulp.task('doc', ['jsdoc']);
 
 // Build docs directory with JSDoc.
-gulp.task('jsdoc', function() {
+// Completely dependent on clean before running doc.
+gulp.task('jsdoc', ['clean'], function(cb) {
     gulp.src(paths.docable, paths.readme)
         .pipe(jsdoc('./doc'));
+    cb(null);
 });
 
 // Get rid of anything that is transient.
 gulp.task('clean', function(cb) {
     del(paths.transients);
+    cb(null);
 });
 
 // Testing with mocha/chai.
