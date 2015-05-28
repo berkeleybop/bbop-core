@@ -16,4 +16,4 @@ environment.
 
 ## API
 
-[index](https://berkeleybop.github.io/bbop-core/docs/index.html)
+[index](https://berkeleybop.github.io/bbop-core/doc/index.html)

@@ -1,6 +1,6 @@
 {
     "name": "bbop-core",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "license": "BSD-3-Clause",
     "description": "A set of useful and common JavaScript functions to supplement other more basic utility libraries.",
     "keywords": [
