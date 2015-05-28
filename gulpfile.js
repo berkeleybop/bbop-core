@@ -11,8 +11,10 @@ var git = require('gulp-git');
 var bump = require('gulp-bump');
 
 var paths = {
+    readme: ['./README.md'],
     tests: ['tests/*.test.js', 'tests/*.tests.js'],
-    docable: ['lib/*.js']
+    docable: ['lib/*.js', './README.md'],
+    transients:['./doc/*', '!./doc/README.org']
 };
 
 // Browser runtime environment construction.
@@ -30,9 +32,19 @@ gulp.task('doc', function() {
         .pipe(jsdoc('./doc'));
 });
 
+// Build docs directory with JSDoc.
+//gulp.task('doc', ['md-to-org', 'jsdoc']);
+gulp.task('doc', ['jsdoc']);
+
+// Build docs directory with JSDoc.
+gulp.task('jsdoc', function() {
+    gulp.src(paths.docable, paths.readme)
+        .pipe(jsdoc('./doc'));
+});
+
 // Get rid of anything that is transient.
 gulp.task('clean', function(cb) {
-    del(['./doc/*', '!./doc/README.org']);
+    del(paths.transients);
 });
 
 // Testing with mocha/chai.
@@ -75,6 +87,12 @@ gulp.task('git-tag', function(){
     git.tag('go-exp-widget-' + pver, 'version message', function (err){
 	if(err) throw err;
     });
+});
+
+// Rerun doc build when a file changes.
+gulp.task('watch-doc', function() {
+  gulp.watch(paths.docable, ['doc']);
+  gulp.watch(paths.readme, ['doc']);
 });
 
 // The default task (called when you run `gulp` from cli)
