@@ -20,7 +20,7 @@
     "homepage": "http://berkeleybop.org/",
     "repository": {
         "type": "git",
-        "url": "https://github.com/berkeleybop/bbop-core"
+        "url": "git+https://github.com/berkeleybop/bbop-core.git"
     },
     "engines": {
         "node": ">= 0.12.2",
@@ -38,7 +38,10 @@
         "gulp-jsdoc": "^0.1.4",
         "gulp-mocha": "^2.0.1",
         "gulp-rename": "^1.2.2",
-        "gulp-uglify": "^1.2.0"
+        "gulp-shell": "^0.4.2",
+        "gulp-uglify": "^1.2.0",
+        "jsdoc": "^3.3.0",
+        "jsdoc-baseline": "git://github.com/hegemonic/jsdoc-baseline.git#74d1dc8075"
     },
     "bundleDependencies": [],
     "private": false,
@@ -52,7 +55,7 @@
         "tests": "tests"
     },
     "scripts": {
-	"update-docs": "git checkout gh-pages && git pull && git merge master && gulp doc && git commit -a -m 'bump docs' && git push && git checkout master",
+        "update-docs": "git checkout gh-pages && git pull && git merge master && gulp doc && git commit -a -m 'bump docs' && git push && git checkout master",
         "test": "./node_modules/.bin/gulp test"
     }
 }
